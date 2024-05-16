@@ -109,7 +109,7 @@ $$bb = b\times b = B \times B = \varnothing$$
       & b  &  a &  a & b  &  a 
     \end{tabular}
 \end{center}
-Строки длины 3. Мне тоже надоело, но что есть:
+Строки длины 3.
 $$baa = b\times aa = B \times B = BB = \varnothing$$
 $$baa = ba\times a = S,A \times A,C = SA, AA, SC, AC = \varnothing$$
 $$aab = a\times ab = A,C \times S,C = AS, CS, AC, CC = B$$
@@ -126,7 +126,7 @@ $$aba = ab\times a = S,C \times A,C = SA, CA, SC, CC = B$$
       & b  &  a &  a & b  &  a 
     \end{tabular}
 \end{center}
-Строки дЛиНы чУтЫрЕ.
+Строки длины 4.
 $$baab = b\times aab = B \times B = BB = \varnothing$$
 $$baab = ba\times ab = S,A \times S,C = SS, AS, SC, AC = \varnothing$$
 $$baab = baa\times b = \varnothing \times B = \varnothing$$
@@ -143,7 +143,7 @@ $$aaba = aab\times a = B \times A,C = BA, BC = A,S,C$$
       & b  &  a &  a & b  &  a 
     \end{tabular}
 \end{center}
-Строки длины ять. Пять. А вы о чем подумали?
+Строки длины 5. 
 $$baaba = b\times aaba = B \times S,A,C = BS, BA, BC = A, S$$
 $$baaba = ba\times aba = S,A \times B = SA, AB = S,C$$
 $$baaba = baa\times ba = \varnothing \times S,A = \varnothing$$
@@ -162,5 +162,72 @@ $$baaba = baab\times a = \varnothing \times A,C = \varnothing$$
 (развертки) нетерминалов S, A, C.\\\\
 УПРАЖНЕНИЕ. 
 Убедиться, что все указанные нетерминалы преобразуются в искомую строку. 
+\part{LL1 парсер}
+Всё начинается с таблицы парсинга. Для составления таблицы необходимо вначале 
+посчитать множества символов FIRST и FOLLOW для каждого нетерминала. 
+Рассмотрим следующую грамматику:
+$$A \to CB $$
+$$B \to +CB \ | \ \epsilon $$
+$$C \to ED $$
+$$D \to *ED \ | \ \epsilon$$
+$$E \to id \ | \ (A)$$
+FIRST - множество первых символов строк, производимых данным терминалом:\\
+$$FIRST(A)=FIRST(C)$$
+$$FIRST(B)=\ '+' \cup \ \epsilon$$
+$$FIRST(C)=FIRST(E)$$
+$$FIRST(D)=\ '*' \cup \ \epsilon$$
+$$FIRST(E)=\ 'id' \cup \ '('$$
+FOLLOW - множество символов строк, которые могут быть после данного терминала:\\
+$$FOLLOW(A)=\ ')' \cup \ '\$' $$
+$$FOLLOW(B)=FOLLOW(A) \cup \ '\$'$$
+$$FOLLOW(C)=FIRST(B) & FOLLOW(A) & FOLLOW(B)\ \setminus \epsilon \cup \ '\$'$$
+$$FOLLOW(D)=FOLLOW(C) \ \setminus \epsilon \cup \ '\$'$$
+$$FOLLOW(E)=FIRST(D) & FOLLOW(C) & FOLLOW(D)\ \setminus \epsilon \cup \ '\$'$$
+Получм:\\
+\begin{center}
+  \begin{tabular}{ c c с}
+    NT & FIRST & FOLLOW         \\
+    A &  id, ( & ), \$          \\
+    B &  +, \epsilon & ), \$    \\
+    C &  id, ( & +, ), \$       \\
+    D &  *, \epsilon & +, ), \$ \\
+    E &  id, ( & *, +, ), \$ 
+  \end{tabular}
+\end{center}
+Теперь, таблица парсинга. Она содержит производящие правила на пересечении 
+терминалов и нетерминалов. Заполняется
+она так для каждого нетерминала NT:\\
+1. Если $\epsilon \in FIRST(NT)$, то пишем правило, которым 
+получился $\epsilon$, во всех строках из FOLLOW(NT).
+2. Для всех прочих символов из FIRST(NT)
+в соответствующих строках пишется правило, которым этот символ был получен.
+\begin{center}
+  \begin{tabular}{ c c с c c c c}
+    NT/T & id          & (            & + & ) & * & \$  \\
+    A    & $A \to CB $ & $A \to CB $  &   &   &   &     \\
+    B    &             &              &  $B \to +CB$ & $B \to \epsilon$  &   & $B \to \epsilon$     \\
+    C    & $C \to ED $ & $C \to ED $  &   &   &   &     \\
+    D    &             &              &  $D \to \epsilon$ & $D \to \epsilon$  &  $D \to *ED $ & $D \to \epsilon$     \\
+    E    & $E \to id $ & $E \to (A) $ &   &   &   &     \\
+  \end{tabular}
+\end{center}
+Удивительно, но алгоритм предельно прост. Мы всего лишь инициализируем 
+стек стартовым нетерминалом, а в конец рассматриваемой строки добавляем
+конечный символ \$.\\\\
+Далее происходит следующее. Мы достаём символ из строки и нечто со стека.
+Если нечто - терминал и совпало с символом, то убираем и вершину стека, 
+и двигаем текущий символ. Если нет - ошибка.\\
+Если же нечто - нетерминал, то мы ищем в таблице запись на пересечении
+нечто и текущего символа строки. Запись добавляется в стек, так что 
+первый её элемент наверху. Если запись не найдена, то ошибка.
+Так повторяется пока текущий символ не станет концом строки или не 
+будет получена ошибка. Если ошибок не было, то строка принадлежит языку.
+\\\\
+УПРАЖНЕНИЕ: написать алгоритм самостоятельно. Проверить его для 
+грамматики 
+$$S^{'} \to S$$
+$$S \to xYzS | a$$
+$$Y \to xYz | y$$
+и строк $xxyzza$ и $xxyzzz$.
 \end{document}
 
