@@ -177,9 +177,9 @@ $$FIRST(E)=\ 'id' \cup \ '('$$
 FOLLOW - множество символов строк, которые могут быть после данного терминала:\\
 $$FOLLOW(A)=\ ')' \cup \ '\$' $$
 $$FOLLOW(B)=FOLLOW(A) \cup \ '\$'$$
-$$FOLLOW(C)=FIRST(B) & FOLLOW(A) & FOLLOW(B)\ \setminus \epsilon \cup \ '\$'$$
+$$FOLLOW(C)=FIRST(B) \cup FOLLOW(A) \cup FOLLOW(B)\ \setminus \epsilon \cup \ '\$'$$
 $$FOLLOW(D)=FOLLOW(C) \ \setminus \epsilon \cup \ '\$'$$
-$$FOLLOW(E)=FIRST(D) & FOLLOW(C) & FOLLOW(D)\ \setminus \epsilon \cup \ '\$'$$
+$$FOLLOW(E)=FIRST(D) \cup FOLLOW(C) \cup FOLLOW(D)\ \setminus \epsilon \cup \ '\$'$$
 Получм:\\
 \begin{center}
   \begin{tabular}{ c c с}
@@ -223,8 +223,8 @@ $$FOLLOW(E)=FIRST(D) & FOLLOW(C) & FOLLOW(D)\ \setminus \epsilon \cup \ '\$'$$
 УПРАЖНЕНИЕ: написать алгоритм самостоятельно. Проверить его для 
 грамматики 
 $$S^{'} \to S$$
-$$S \to xYzS | a$$
-$$Y \to xYz | y$$
+$$S \to xYzS \ | \ a$$
+$$Y \to xYz \ | \ y$$
 и строк $xxyzza$ и $xxyzzz$.
 \end{document}
 
