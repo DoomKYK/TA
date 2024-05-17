@@ -187,12 +187,12 @@ $$FOLLOW(D)=FOLLOW(C) \ \setminus \epsilon \cup \ '\$'$$
 $$FOLLOW(E)=FIRST(D) \cup FOLLOW(C) \cup FOLLOW(D)\ \setminus \epsilon \cup \ '\$'$$
 Получм:\\
 \begin{center}
-  \begin{tabular}{ c c с }
+  \begin{tabular}{ c c c }
     NT & FIRST & FOLLOW         \\
     A &  id, ( & ), \$          \\
-    B &  +, \epsilon & ), \$    \\
+    B &  +, $\epsilon$ & ), \$    \\
     C &  id, ( & +, ), \$       \\
-    D &  *, \epsilon & +, ), \$ \\
+    D &  *, $\epsilon$ & +, ), \$ \\
     E &  id, ( & *, +, ), \$ 
   \end{tabular}
 \end{center}
@@ -204,7 +204,7 @@ $$FOLLOW(E)=FIRST(D) \cup FOLLOW(C) \cup FOLLOW(D)\ \setminus \epsilon \cup \ '\
 2. Для всех прочих символов из FIRST(NT)
 в соответствующих строках пишется правило, которым этот символ был получен.
 \begin{center}
-  \begin{tabular}{ c c с c c c c }
+  \begin{tabular}{ c c c c c c c }
     NT/T & id          & (            & + & ) & * & \$  \\
     A    & $A \to CB $ & $A \to CB $  &   &   &   &     \\
     B    &             &              &  $B \to +CB$ & $B \to \epsilon$  &   & $B \to \epsilon$     \\
