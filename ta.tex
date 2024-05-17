@@ -61,9 +61,9 @@ $$ S \to BC \to bC \to ba$$
 Выглядит она следующим образом (цифры - длины подстрок, НТ - нетерминалы):\\
 \begin{center}
     \begin{tabular}{ c c c c c c }
-    5 & НТ & & & & \\ 
-    4 & НТ & НТ & &  \\  
-    3 & НТ & НТ & НТ &  \\  
+    5 & НТ \\ 
+    4 & НТ & НТ  \\  
+    3 & НТ & НТ & НТ   \\  
     2 & НТ & НТ & НТ & НТ  \\  
     1 & НТ & НТ & НТ & НТ & НТ  \\
       & b  &  a &  a & b  &  a 
@@ -73,9 +73,9 @@ $$ S \to BC \to bC \to ba$$
 Пока что для нас она выглядит так:
 \begin{center}
     \begin{tabular}{ c c c c c c }
-    5 & НТ & & & & \\ 
-    4 & НТ & НТ & &  \\  
-    3 & НТ & НТ & НТ &  \\  
+    5 & НТ  \\ 
+    4 & НТ & НТ   \\  
+    3 & НТ & НТ & НТ   \\  
     2 & НТ & НТ & НТ & НТ  \\  
     1 & B & A,C & A,C & B & A,C  \\
       & b  &  a &  a & b  &  a 
@@ -84,9 +84,9 @@ $$ S \to BC \to bC \to ba$$
 И, учитывая что мы уже успели проанализировать первое $ba$:
 \begin{center}
     \begin{tabular}{ c c c c c c }
-    5 & НТ & & & & \\ 
-    4 & НТ & НТ & &  \\  
-    3 & НТ & НТ & НТ &  \\  
+    5 & НТ  \\ 
+    4 & НТ & НТ   \\  
+    3 & НТ & НТ & НТ   \\  
     2 & S,A & НТ & НТ & НТ  \\  
     1 & B & A,C & A,C & B & A,C  \\
       & b  &  a &  a & b  &  a 
@@ -98,9 +98,9 @@ $$ab = a\times b = A,C \times B = AB, CB = S, C$$
 $$bb = b\times b = B \times B = \varnothing$$
 \begin{center}
     \begin{tabular}{ c c c c c c }
-    5 & НТ & & & & \\ 
-    4 & НТ & НТ & &  \\  
-    3 & НТ & НТ & НТ &  \\  
+    5 & НТ \\ 
+    4 & НТ & НТ   \\  
+    3 & НТ & НТ & НТ   \\  
     2 & S,A & B & S,C & S,A  \\  
     1 & B & A,C & A,C & B & A,C  \\
       & b  &  a &  a & b  &  a 
@@ -115,9 +115,9 @@ $$aba = a\times ba = A,C \times S,A = AS, CS, AA, CA = \varnothing$$
 $$aba = ab\times a = S,C \times A,C = SA, CA, SC, CC = B$$
 \begin{center}
     \begin{tabular}{ c c c c c c }
-    5 & НТ & & & & \\ 
-    4 & НТ & НТ & &  \\  
-    3 & $\varnothing$ & B & B &  \\  
+    5 & НT \\ 
+    4 & НТ & НТ   \\  
+    3 & $\varnothing$ & B & B   \\  
     2 & S,A & B & S,C & S,A  \\  
     1 & B & A,C & A,C & B & A,C  \\
       & b  &  a &  a & b  &  a 
@@ -132,9 +132,9 @@ $$aaba = aa\times ba = B \times S,A = BS, BA = A$$
 $$aaba = aab\times a = B \times A,C = BA, BC = A,S$$
 \begin{center}
     \begin{tabular}{ c c c c c c }
-    5 & НТ & & & & \\ 
-    4 & $\varnothing$ & S,A,C & &  \\  
-    3 & $\varnothing$ & B & B &  \\  
+    5 & НТ  \\ 
+    4 & $\varnothing$ & S,A,C   \\  
+    3 & $\varnothing$ & B & B   \\  
     2 & S,A & B & S,C & S,A  \\  
     1 & B & A,C & A,C & B & A,C  \\
       & b  &  a &  a & b  &  a 
@@ -147,9 +147,9 @@ $$baaba = baa\times ba = \varnothing \times S,A = \varnothing$$
 $$baaba = baab\times a = \varnothing \times A,C = \varnothing$$
 \begin{center}
     \begin{tabular}{ c c c c c c }
-    5 & S,A,C & & & & \\ 
-    4 & $\varnothing$ & S,A,C & &  \\  
-    3 & $\varnothing$ & B & B &  \\  
+    5 & S,A,C  \\ 
+    4 & $\varnothing$ & S,A,C   \\  
+    3 & $\varnothing$ & B & B   \\  
     2 & S,A & B & S,C & S,A  \\  
     1 & B & A,C & A,C & B & A,C  \\
       & b  &  a &  a & b  &  a 
@@ -232,4 +232,3 @@ $$S \to xYzS \ | \ a$$
 $$Y \to xYz \ | \ y$$
 и строк $xxyzza$ и $xxyzzz$.
 \end{document}
-
