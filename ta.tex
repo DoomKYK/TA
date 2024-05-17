@@ -60,7 +60,7 @@ $$ S \to BC \to bC \to ba$$
 Видимо, кто-то из авторов тоже устал, и придумал лестницу КЯК или как она там. 
 Выглядит она следующим образом (цифры - длины подстрок, НТ - нетерминалы):\\
 \begin{center}
-    \begin{tabular}{ c c c c c c}
+    \begin{tabular}{ c c c c c c }
     5 & НТ & & & & \\ 
     4 & НТ & НТ & &  \\  
     3 & НТ & НТ & НТ &  \\  
@@ -72,7 +72,7 @@ $$ S \to BC \to bC \to ba$$
 Эта таблица показывает, из каких нетерминалов какую строку мы можем построить.
 Пока что для нас она выглядит так:
 \begin{center}
-    \begin{tabular}{ c c c c c c}
+    \begin{tabular}{ c c c c c c }
     5 & НТ & & & & \\ 
     4 & НТ & НТ & &  \\  
     3 & НТ & НТ & НТ &  \\  
@@ -83,7 +83,7 @@ $$ S \to BC \to bC \to ba$$
 \end{center}
 И, учитывая что мы уже успели проанализировать первое $ba$:
 \begin{center}
-    \begin{tabular}{ c c c c c c}
+    \begin{tabular}{ c c c c c c }
     5 & НТ & & & & \\ 
     4 & НТ & НТ & &  \\  
     3 & НТ & НТ & НТ &  \\  
@@ -97,7 +97,7 @@ $$aa = a\times a = A,C \times A,C = AA, CA, AC, CC = B$$
 $$ab = a\times b = A,C \times B = AB, CB = S, C$$
 $$bb = b\times b = B \times B = \varnothing$$
 \begin{center}
-    \begin{tabular}{ c c c c c c}
+    \begin{tabular}{ c c c c c c }
     5 & НТ & & & & \\ 
     4 & НТ & НТ & &  \\  
     3 & НТ & НТ & НТ &  \\  
@@ -114,7 +114,7 @@ $$aab = aa\times b = B \times B = \varnothing$$
 $$aba = a\times ba = A,C \times S,A = AS, CS, AA, CA = \varnothing$$
 $$aba = ab\times a = S,C \times A,C = SA, CA, SC, CC = B$$
 \begin{center}
-    \begin{tabular}{ c c c c c c}
+    \begin{tabular}{ c c c c c c }
     5 & НТ & & & & \\ 
     4 & НТ & НТ & &  \\  
     3 & $\varnothing$ & B & B &  \\  
@@ -131,7 +131,7 @@ $$aaba = a\times aba = A,C \times B = AB, CB = S, C$$
 $$aaba = aa\times ba = B \times S,A = BS, BA = A$$
 $$aaba = aab\times a = B \times A,C = BA, BC = A,S$$
 \begin{center}
-    \begin{tabular}{ c c c c c c}
+    \begin{tabular}{ c c c c c c }
     5 & НТ & & & & \\ 
     4 & $\varnothing$ & S,A,C & &  \\  
     3 & $\varnothing$ & B & B &  \\  
@@ -146,7 +146,7 @@ $$baaba = ba\times aba = S,A \times B = SA, AB = S,C$$
 $$baaba = baa\times ba = \varnothing \times S,A = \varnothing$$
 $$baaba = baab\times a = \varnothing \times A,C = \varnothing$$
 \begin{center}
-    \begin{tabular}{ c c c c c c}
+    \begin{tabular}{ c c c c c c }
     5 & S,A,C & & & & \\ 
     4 & $\varnothing$ & S,A,C & &  \\  
     3 & $\varnothing$ & B & B &  \\  
@@ -187,7 +187,7 @@ $$FOLLOW(D)=FOLLOW(C) \ \setminus \epsilon \cup \ '\$'$$
 $$FOLLOW(E)=FIRST(D) \cup FOLLOW(C) \cup FOLLOW(D)\ \setminus \epsilon \cup \ '\$'$$
 Получм:\\
 \begin{center}
-  \begin{tabular}{ c c с}
+  \begin{tabular}{ c c с }
     NT & FIRST & FOLLOW         \\
     A &  id, ( & ), \$          \\
     B &  +, \epsilon & ), \$    \\
@@ -204,7 +204,7 @@ $$FOLLOW(E)=FIRST(D) \cup FOLLOW(C) \cup FOLLOW(D)\ \setminus \epsilon \cup \ '\
 2. Для всех прочих символов из FIRST(NT)
 в соответствующих строках пишется правило, которым этот символ был получен.
 \begin{center}
-  \begin{tabular}{ c c с c c c c}
+  \begin{tabular}{ c c с c c c c }
     NT/T & id          & (            & + & ) & * & \$  \\
     A    & $A \to CB $ & $A \to CB $  &   &   &   &     \\
     B    &             &              &  $B \to +CB$ & $B \to \epsilon$  &   & $B \to \epsilon$     \\
